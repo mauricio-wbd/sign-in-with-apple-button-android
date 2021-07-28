@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.webkit.WebView
 import androidx.fragment.app.DialogFragment
+import com.willowtreeapps.signinwithapplebutton.FormInterceptorInterface
 import com.willowtreeapps.signinwithapplebutton.R
 import com.willowtreeapps.signinwithapplebutton.SignInWithAppleResult
 import com.willowtreeapps.signinwithapplebutton.SignInWithAppleService
@@ -33,6 +34,7 @@ internal class SignInWebViewDialogFragment : DialogFragment() {
 
     private lateinit var authenticationAttempt: SignInWithAppleService.AuthenticationAttempt
     private var callback: ((SignInWithAppleResult) -> Unit)? = null
+    private var cancelCallback: (() -> Unit) = { dialog?.dismiss() }
 
     private val webViewIfCreated: WebView?
         get() = view as? WebView
@@ -61,7 +63,11 @@ internal class SignInWebViewDialogFragment : DialogFragment() {
             }
         }
 
-        webView.webViewClient = SignInWebViewClient(authenticationAttempt, ::onCallback)
+        val formInterceptorInterface = FormInterceptorInterface(authenticationAttempt.state, callback, cancelCallback)
+        webView.addJavascriptInterface(formInterceptorInterface, FormInterceptorInterface.NAME)
+
+        webView.webViewClient =
+            UrlInterceptorWebViewClient(authenticationAttempt.redirectUri, FormInterceptorInterface.JS_TO_INJECT)
 
         if (savedInstanceState != null) {
             savedInstanceState.getBundle(WEB_VIEW_KEY)?.run {

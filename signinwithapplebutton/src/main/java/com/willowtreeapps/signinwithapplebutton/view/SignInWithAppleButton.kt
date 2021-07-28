@@ -90,18 +90,23 @@ class SignInWithAppleButton @JvmOverloads constructor(
     fun setUpSignInWithAppleOnClick(
         fragmentManager: FragmentManager,
         configuration: SignInWithAppleConfiguration,
-        callback: (SignInWithAppleResult) -> Unit
+        callback: (SignInWithAppleResult) -> Unit,
+        onClick: (() -> Unit)? = null
     ) {
         val fragmentTag = "SignInWithAppleButton-$id-SignInWebViewDialogFragment"
         val service = SignInWithAppleService(fragmentManager, fragmentTag, configuration, callback)
-        setOnClickListener { service.show() }
+        setOnClickListener {
+            onClick?.invoke()
+            service.show()
+        }
     }
 
     fun setUpSignInWithAppleOnClick(
         fragmentManager: FragmentManager,
         configuration: SignInWithAppleConfiguration,
-        callback: SignInWithAppleCallback
+        callback: SignInWithAppleCallback,
+        onClick: (() -> Unit)? = null
     ) {
-        setUpSignInWithAppleOnClick(fragmentManager, configuration, callback.toFunction())
+        setUpSignInWithAppleOnClick(fragmentManager, configuration, callback.toFunction(), onClick)
     }
 }

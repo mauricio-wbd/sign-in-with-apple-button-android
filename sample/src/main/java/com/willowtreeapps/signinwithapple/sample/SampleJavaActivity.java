@@ -50,8 +50,8 @@ public class SampleJavaActivity extends AppCompatActivity {
             }
         };
 
-        signInWithAppleButtonBlack.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback);
-        signInWithAppleButtonWhite.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback);
-        signInWithAppleButtonWhiteOutline.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback);
+        signInWithAppleButtonBlack.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback, null);
+        signInWithAppleButtonWhite.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback, null);
+        signInWithAppleButtonWhiteOutline.setUpSignInWithAppleOnClick(getSupportFragmentManager(), configuration, callback, null);
     }
 }
