@@ -66,24 +66,23 @@ class SignInWithAppleService(
             https://developer.apple.com/documentation/signinwithapplejs/configuring_your_webpage_for_sign_in_with_apple
             */
             fun create(
-                configuration: SignInWithAppleConfiguration,
-                state: String = UUID.randomUUID().toString()
+                configuration: SignInWithAppleConfiguration
             ): AuthenticationAttempt {
                 val authenticationUri = Uri
                     .parse("https://appleid.apple.com/auth/authorize")
                     .buildUpon().apply {
                         appendQueryParameter("response_type", "code")
-                        appendQueryParameter("v", "1.1.6")
                         appendQueryParameter("client_id", configuration.clientId)
                         appendQueryParameter("redirect_uri", configuration.redirectUri)
                         appendQueryParameter("scope", configuration.scope)
-                        appendQueryParameter("state", state)
+                        appendQueryParameter("state", configuration.state)
+                        appendQueryParameter("nonce", configuration.nonce)
                         appendQueryParameter("response_mode", "form_post")
                     }
                     .build()
                     .toString()
 
-                return AuthenticationAttempt(authenticationUri, configuration.redirectUri, state)
+                return AuthenticationAttempt(authenticationUri, configuration.redirectUri, configuration.state)
             }
         }
     }

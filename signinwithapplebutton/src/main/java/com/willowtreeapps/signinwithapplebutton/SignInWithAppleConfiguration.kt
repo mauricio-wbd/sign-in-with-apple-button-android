@@ -3,13 +3,17 @@ package com.willowtreeapps.signinwithapplebutton
 data class SignInWithAppleConfiguration(
     val clientId: String,
     val redirectUri: String,
-    val scope: String
+    val scope: String,
+    val nonce: String,
+    val state: String
 ) {
 
     class Builder {
         private lateinit var clientId: String
         private lateinit var redirectUri: String
         private lateinit var scope: String
+        private lateinit var nonce: String
+        private lateinit var state: String
 
         fun clientId(clientId: String) = apply {
             this.clientId = clientId
@@ -23,6 +27,14 @@ data class SignInWithAppleConfiguration(
             this.scope = scope
         }
 
-        fun build() = SignInWithAppleConfiguration(clientId, redirectUri, scope)
+        fun nonce(nonce: String) = apply {
+            this.nonce = nonce
+        }
+
+        fun state(state: String) = apply {
+            this.state = state
+        }
+
+        fun build() = SignInWithAppleConfiguration(clientId, redirectUri, scope, nonce, state)
     }
 }
