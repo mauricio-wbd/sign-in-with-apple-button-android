@@ -5,7 +5,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.fragment.app.FragmentManager
 import com.willowtreeapps.signinwithapplebutton.view.SignInWebViewDialogFragment
-import java.util.*
 
 class SignInWithAppleService(
     private val fragmentManager: FragmentManager,
@@ -71,7 +70,7 @@ class SignInWithAppleService(
                 val authenticationUri = Uri
                     .parse("https://appleid.apple.com/auth/authorize")
                     .buildUpon().apply {
-                        appendQueryParameter("response_type", "code")
+                        appendQueryParameter("response_type", "code id_token")
                         appendQueryParameter("client_id", configuration.clientId)
                         appendQueryParameter("redirect_uri", configuration.redirectUri)
                         appendQueryParameter("scope", configuration.scope)
