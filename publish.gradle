@@ -8,7 +8,7 @@ def siteUrl = 'https://github.com/willowtreeapps/sign-in-with-apple-button-andro
 def gitUrl = 'https://github.com/willowtreeapps/sign-in-with-apple-button-android.git'
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from(android.sourceSets.main.java.srcDirs)
 }
 
@@ -18,7 +18,7 @@ task androidJavadocs(type: Javadoc) {
 }
 
 task javadocsJar(type: Jar) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from(androidJavadocs)
 }
 
