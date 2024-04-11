@@ -45,6 +45,7 @@ internal class SignInWebViewDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        @Suppress("DEPRECATION")
         authenticationAttempt = arguments?.getParcelable(AUTHENTICATION_ATTEMPT_KEY)!!
         setStyle(STYLE_NORMAL, R.style.sign_in_with_apple_button_DialogTheme)
     }
@@ -56,7 +57,7 @@ internal class SignInWebViewDialogFragment : DialogFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        val webView = WebView(context).apply {
+        val webView = WebView(requireContext()).apply {
             settings.apply {
                 javaScriptEnabled = true
                 javaScriptCanOpenWindowsAutomatically = true
