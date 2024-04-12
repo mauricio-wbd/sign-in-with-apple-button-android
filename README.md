@@ -1,3 +1,10 @@
+Originally forked from: https://github.com/willowtreeapps/sign-in-with-apple-button-android
+
+To use include in Gradle as: `implementation 'com.github.mauricio-wbd:sign-in-with-apple-button-android:1.0.3'`
+
+# -
+
+
 # Sign In with Apple Button for Android
 
 A library for adding [Sign In With Apple](https://developer.apple.com/sign-in-with-apple/) to Android apps.
